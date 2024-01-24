@@ -13,7 +13,20 @@ const textureLoader = new THREE.TextureLoader()
 const gltfLoader = new GLTFLoader()
 const fontLoader = new FontLoader()
 const raycaster = new THREE.Raycaster()
+let loaded = 0;
+const total = 2;
 
+const checkModelLoaded = ()=>{
+  loaded++;
+  if(loaded===total){
+    // Hide the loading screen and display the canvas
+    document.querySelector('.loading').style.display = 'none';
+    document.querySelector('canvas').style.display = 'block';
+
+    // Display the loading popup
+   // document.getElementById('loading-popup').style.display = 'block';
+  }
+}
 const sizes = {
   width: window.innerWidth,
   height: window.innerHeight
@@ -57,6 +70,7 @@ gltfLoader.load('/models/windmill_game_ready/scene.gltf',
     windmill_2.position.set(-250, 0, 200)
     scene.add(windmill_1)
     scene.add(windmill_2)
+    checkModelLoaded()
     const mixer1 = new THREE.AnimationMixer(windmill_1)
     const mixer2 = new THREE.AnimationMixer(windmill_2)
     const action1 = mixer1.clipAction(gltf.animations[0])
@@ -244,6 +258,7 @@ gltfLoader.load('/models/house_1.glb', (gltf) => {
   house_5.rotation.y = Math.PI
 
   scene.add(house_1, house_2, house_3, house_4, house_5)
+  checkModelLoaded()
 })
 
 // Flying Bird
@@ -755,6 +770,51 @@ window.addEventListener('resize', (e) => {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 })
 
+// Handle the Touch Screen Controls
+const buttons = document.querySelectorAll('div')
+
+buttons.forEach((button)=>{
+  button.addEventListener('touchstart',()=>{
+    if(button.textContent==='w'){
+      keyDisplayQueue.down('w')
+      keysPressed['w'] = true
+    }
+    else if(button.textContent==='a'){
+      keyDisplayQueue.down('a')
+      keysPressed['a'] = true
+    }
+    else if(button.textContent==='s'){
+      keyDisplayQueue.down('s')
+      keysPressed['s'] = true
+    }
+    else if(button.textContent==='d'){
+      keyDisplayQueue.down('d')
+      keysPressed['d'] = true
+    }
+  })
+
+    button.addEventListener('touchend',()=>{
+      if(button.textContent==='w'){
+        keyDisplayQueue.up('w')
+        keysPressed['w'] = false
+      }
+      else if(button.textContent==='a'){
+        keyDisplayQueue.up('a')
+        keysPressed['a'] = false
+      }
+      else if(button.textContent==='s'){
+        keyDisplayQueue.up('s')
+        keysPressed['s'] = false
+      }
+      else if(button.textContent==='d'){
+        keyDisplayQueue.up('d')
+        keysPressed['d'] = false
+      }
+    })
+
+})
+
+
 // Full Screen mode
 window.addEventListener('dblclick', () => {
   const fullScreenElement = document.fullscreenElement || document.webkitFullscreenElement
@@ -916,22 +976,3 @@ export function onMouseClick(event, clickableMesh) {
   }
 }
 
-
-// Create Line
-
-// Create a line geometry with two points
-function createLine() {
-  // const points = [];
-  // points.push( new THREE.Vector3( -180, 40, 200 ) );
-  // //points.push( new THREE.Vector3( 0, 10, 0 ) );
-  // points.push( new THREE.Vector3( -180, 0, 200 ) );
-
-  // const geometry = new THREE.BufferGeometry().setFromPoints( points )
-  // const material = new THREE.LineBasicMaterial({ color: 0x000000 });
-
-  // // Create the line using the geometry and material
-  // const line = new THREE.Line(geometry, material);
-  const tube = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.5, 40, 20), new THREE.MeshBasicMaterial({ color: 'black' }))
-  tube.position.set(-180, 20, 200)
-  return tube
-}

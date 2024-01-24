@@ -39,9 +39,9 @@ export class KeyDisplay {
         this.map.get(D).style.top = `${window.innerHeight - 200}px`
 
         this.map.get(W).style.right = `${300}px`
-        this.map.get(A).style.right = `${200}px`
+        this.map.get(A).style.right = `${400}px`
         this.map.get(S).style.right = `${300}px`
-        this.map.get(D).style.right = `${400}px`
+        this.map.get(D).style.right = `${200}px`
     }
 
     down(key) {
