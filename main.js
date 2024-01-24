@@ -22,9 +22,6 @@ const checkModelLoaded = ()=>{
     // Hide the loading screen and display the canvas
     document.querySelector('.loading').style.display = 'none';
     document.querySelector('canvas').style.display = 'block';
-
-    // Display the loading popup
-   // document.getElementById('loading-popup').style.display = 'block';
   }
 }
 const sizes = {
@@ -58,7 +55,6 @@ let mixers = []
 let character = null
 let windmill_1 = null
 let windmill_2 = null
-let nandi = null
 let dog = null
 // windMill
 gltfLoader.load('/models/windmill_game_ready/scene.gltf',
@@ -84,22 +80,8 @@ gltfLoader.load('/models/windmill_game_ready/scene.gltf',
 // Bush
 gltfLoader.load('/models/game_ready_bush/scene.gltf', (gltf) => {
   gltf.scene.scale.set(30, 30, 30)
-  gltf.scene.position.set(-350, 0.04, 15)
+  gltf.scene.position.set(-370, 0.04, -15)
   scene.add(gltf.scene)
-})
-
-// Tree
-gltfLoader.load('/models/maple_tree/scene.gltf', (gltf) => {
-  gltf.scene.position.set(-750, 0.04, 15)
-  scene.add(gltf.scene)
-})
-
-// Tree
-gltfLoader.load('/models/pine__fin_tree/scene.gltf', (gltf) => {
-  gltf.scene.scale.set(10, 10, 10)
-  const tree_1 = gltf.scene.clone()
-  tree_1.position.set(-450, 0.04, 0)
-  scene.add(tree_1)
 })
 
 // Moving Tree
@@ -197,15 +179,6 @@ gltfLoader.load('/models/low_poly_wolf.glb', (gltf) => {
   const action = mixer.clipAction(gltf.animations[3])
   action.play()
   mixers.push(mixer)
-})
-
-// Nandi
-gltfLoader.load('/models/nandi/scene.gltf', (gltf) => {
-  gltf.scene.scale.set(0.5, 0.5, 0.5)
-  nandi = gltf.scene
-  nandi.rotation.y = Math.PI / 2
-  nandi.position.set(-80, 0.05, 240)
-  scene.add(nandi)
 })
 
 // Dog
@@ -877,7 +850,7 @@ function castRays() {
   ]
   const objects = [house_1, house_2, house_3, house_4, house_5,
     windmill_1, windmill_2, aboutTextCover, skillCover, skillsCover,
-    projectBoard, projectBoard_2, projectBoard_3, nandi, facebookBoard,
+    projectBoard, projectBoard_2, projectBoard_3, facebookBoard,
     linkedinBoard, instagramBoard, gmailBoard, contactCover, girl, raju,
     sunflower_1, sunflower_2]
   const canMove = [true, true, true, true]
