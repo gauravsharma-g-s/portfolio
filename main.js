@@ -32,7 +32,9 @@ const sizes = {
 /**
  * Loading the Textures
  */
-const grassTexture = textureLoader.load('/textures/grass.jpg')
+const grassTexture = textureLoader.load('/textures/grass.jpg',()=>{
+  checkModelLoaded()
+})
 grassTexture.repeat.set(10, 10)
 grassTexture.wrapS = THREE.RepeatWrapping
 grassTexture.wrapT = THREE.RepeatWrapping
@@ -53,29 +55,7 @@ const matcapTexture = textureLoader.load('/textures/8.png')
 
 let mixers = []
 let character = null
-let windmill_1 = null
-let windmill_2 = null
 let dog = null
-// windMill
-gltfLoader.load('/models/windmill_game_ready/scene.gltf',
-  (gltf) => {
-    gltf.scene.scale.set(1500, 1500, 1500)
-    windmill_1 = gltf.scene.clone()
-    windmill_2 = gltf.scene.clone()
-    windmill_1.position.set(-250, 0, 100)
-    windmill_2.position.set(-250, 0, 200)
-    scene.add(windmill_1)
-    scene.add(windmill_2)
-    checkModelLoaded()
-    const mixer1 = new THREE.AnimationMixer(windmill_1)
-    const mixer2 = new THREE.AnimationMixer(windmill_2)
-    const action1 = mixer1.clipAction(gltf.animations[0])
-    action1.play()
-    mixers.push(mixer1)
-    const action2 = mixer2.clipAction(gltf.animations[0])
-    action2.play()
-    mixers.push(mixer2)
-  })
 
 // Bush
 gltfLoader.load('/models/game_ready_bush/scene.gltf', (gltf) => {
@@ -136,37 +116,6 @@ gltfLoader.load('/models/talking_baju_merah.glb', (gltf) => {
   action.play()
   mixers.push(mixer)
 })
-
-// Bee
-let bee_1 = null
-gltfLoader.load('/models/bee_bee_animals/scene.gltf', (gltf) => {
-  gltf.scene.scale.set(0.2, 0.2, 0.2)
-  gltf.scene.rotation.y = -Math.PI / 2
-  bee_1 = gltf.scene
-  bee_1.position.set(45, 30, 150)
-  scene.add(bee_1)
-
-  const mixer = new THREE.AnimationMixer(gltf.scene)
-  const action = mixer.clipAction(gltf.animations[1])
-  action.play()
-  mixers.push(mixer)
-})
-
-// Girl standing at skills
-let skill_girl = null
-gltfLoader.load('/models/1221-black/scene.gltf', (gltf) => {
-  gltf.scene.scale.set(15, 15, 15)
-  gltf.scene.position.set(120, 0.05, 190)
-  gltf.scene.rotation.y = Math.PI / 2
-  skill_girl = gltf.scene
-  scene.add(skill_girl)
-
-  const mixer = new THREE.AnimationMixer(skill_girl)
-  const action = mixer.clipAction(gltf.animations[0])
-  action.play()
-  mixers.push(mixer)
-})
-
 
 // Wolf
 let wolf = null
@@ -849,7 +798,7 @@ function castRays() {
     new THREE.Vector2(-1, 0)
   ]
   const objects = [house_1, house_2, house_3, house_4, house_5,
-    windmill_1, windmill_2, aboutTextCover, skillCover, skillsCover,
+    aboutTextCover, skillCover, skillsCover,
     projectBoard, projectBoard_2, projectBoard_3, facebookBoard,
     linkedinBoard, instagramBoard, gmailBoard, contactCover, girl, raju,
     sunflower_1, sunflower_2]
