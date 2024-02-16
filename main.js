@@ -5,7 +5,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'
 import { CharacterControls } from './CharacterControls'
 import { KeyDisplay } from './util'
-import { entryCircle, createSignBoards, createProjectDescriptionGround, createText, createTextGeometry, createBase, createClickMe } from './addons'
+import { entryCircle, createSignBoards, createProjectDescriptionGround, createText, createTextGeometry, createBase, createClickMe, createTv } from './addons'
 
 const scene = new THREE.Scene()
 const canvas = document.querySelector('.webgl')
@@ -152,36 +152,6 @@ gltfLoader.load('/models/dog.glb', (gltf) => {
   mixers.push(mixer)
 })
 
-/**
- * Project Houses
- */
-let house_1 = null
-let house_2 = null
-let house_3 = null
-let house_4 = null
-let house_5 = null
-gltfLoader.load('/models/house_1.glb', (gltf) => {
-  gltf.scene.scale.set(3, 3, 5)
-  house_1 = gltf.scene.clone()
-  house_2 = gltf.scene.clone()
-  house_3 = gltf.scene.clone()
-  house_4 = gltf.scene.clone()
-  house_4.scale.z = 6
-  house_5 = gltf.scene.clone()
-  house_5.scale.z = 6
-  house_1.position.set(-250, 0, -15)
-  house_2.position.set(250, 0, -35)
-  house_3.position.set(-50, 0, -200)
-  house_4.position.set(50, 0, -175)
-  house_5.position.set(-350, 0, -210)
-
-  house_2.rotation.y = Math.PI
-  house_3.rotation.y = Math.PI
-  house_5.rotation.y = Math.PI
-
-  scene.add(house_1, house_2, house_3, house_4, house_5)
- // checkModelLoaded()
-})
 
 // Flying Bird
 let bird = null
@@ -274,7 +244,7 @@ let gmailBoard = null
 fontLoader.load('/fonts/helvetiker_regular.typeface.json',
   (font) => {
     // Material
-    const material = new THREE.MeshMatcapMaterial({ matcap: matcapTexture })
+   // const material = new THREE.MeshMatcapMaterial({ matcap: matcapTexture })
 
     // Text
     const gauravTextGeometry = createTextGeometry('GAURAV SHARMA', font)
@@ -328,10 +298,10 @@ fontLoader.load('/fonts/helvetiker_regular.typeface.json',
 
     // Display COnnect About
     const connectAbouText = createText(connectAboutTextGeometry, 9, (Math.PI / 2))
-    connectAbouText.position.set(-230, 54, 5)
+    connectAbouText.position.set(-235, 54, 5)
 
     const connectAbout_Text = createText(connectAbout_Textgeometry, 9, (Math.PI / 2))
-    connectAbout_Text.position.set(-230, 54, 5)
+    connectAbout_Text.position.set(-235, 54, 5)
     connectAbout_Text.visible = false
 
     // Display 404NoMore
@@ -339,10 +309,10 @@ fontLoader.load('/fonts/helvetiker_regular.typeface.json',
     four04NoMoreText.position.set(220, 0, -64)
 
     const four04NoMoreAboutText = createText(four04NoMoreAboutTextGeometry, 9, (-Math.PI / 2))
-    four04NoMoreAboutText.position.set(230, 52, -54)
+    four04NoMoreAboutText.position.set(240, 52, -54)
 
     const four04NoMoreAbout_Text = createText(four04NoMore_About_Textgeometry, 8, (-Math.PI / 2))
-    four04NoMoreAbout_Text.position.set(230, 52, -54)
+    four04NoMoreAbout_Text.position.set(238, 52, -54)
     four04NoMoreAbout_Text.visible = false
 
     // Display College
@@ -431,7 +401,7 @@ const field = new THREE.Mesh(
   groundGeometry,
   geometryMaterial)
 field.rotation.x = -Math.PI / 2
-field.position.set(-100, 0.01, -100)
+field.position.set(-100, 0.04, -100)
 scene.add(field)
 
 const field1 = new THREE.Mesh(
@@ -452,17 +422,17 @@ const roadGeometry = new THREE.PlaneGeometry(40, 600)
 const roadMaterial = new THREE.MeshStandardMaterial({ map: roadTexture })
 const road_1 = new THREE.Mesh(roadGeometry, roadMaterial)
 road_1.rotation.x = -Math.PI / 2
-road_1.position.set(0, 0.02, 0)
+road_1.position.set(0, 0.07, 0)
 scene.add(road_1)
 
 const road_2 = new THREE.Mesh(roadGeometry, roadMaterial)
 road_2.rotation.x = -Math.PI / 2
-road_2.position.set(-300, 0.02, 0)
+road_2.position.set(-300, 0.07, 0)
 scene.add(road_2)
 
 const road_3 = new THREE.Mesh(roadGeometry, roadMaterial)
 road_3.rotation.x = -Math.PI / 2
-road_3.position.set(-600, 0.02, 0)
+road_3.position.set(-600, 0.07, 0)
 scene.add(road_3)
 
 const horizontalRoadGeometry = new THREE.PlaneGeometry(40, 900)
@@ -470,30 +440,30 @@ const horizontalRoadMaterial = new THREE.MeshStandardMaterial({ map: roadTexture
 const road_4 = new THREE.Mesh(horizontalRoadGeometry, roadMaterial)
 road_4.rotation.x = -Math.PI / 2
 road_4.rotation.z = -Math.PI / 2
-road_4.position.set(-170, 0.03, 50)
+road_4.position.set(-170, 0.09, 50)
 scene.add(road_4)
 
 const road_5 = new THREE.Mesh(horizontalRoadGeometry, horizontalRoadMaterial)
 road_5.rotation.x = -Math.PI / 2
 road_5.rotation.z = -Math.PI / 2
-road_5.position.set(-170, 0.03, 280)
+road_5.position.set(-170, 0.09, 280)
 scene.add(road_5)
 
 const road_6 = new THREE.Mesh(horizontalRoadGeometry, horizontalRoadMaterial)
 road_6.rotation.x = -Math.PI / 2
 road_6.rotation.z = -Math.PI / 2
-road_6.position.set(-170, 0.03, -280)
+road_6.position.set(-170, 0.09, -280)
 scene.add(road_6)
 
 const road_7 = new THREE.Mesh(horizontalRoadGeometry, horizontalRoadMaterial)
 road_7.rotation.x = -Math.PI / 2
 road_7.rotation.z = -Math.PI / 2
-road_7.position.set(-170, 0.03, -100)
+road_7.position.set(-170, 0.09, -100)
 scene.add(road_7)
 
 const road_8 = new THREE.Mesh(roadGeometry, roadMaterial)
 road_8.rotation.x = -Math.PI / 2
-road_8.position.set(300, 0.02, 0)
+road_8.position.set(300, 0.09, 0)
 scene.add(road_8)
 
 
@@ -521,14 +491,14 @@ scene.add(userCircle_1, userCircle_2, userCircle_3, userCircle_4, userCircle_5)
 
 const connectClick = createClickMe()
 connectClick.rotation.y = Math.PI / 2
-connectClick.position.set(-230, 23, -53)
+connectClick.position.set(-230, 38, -53)
 connectClick.addEventListener('click', () => {
   window.open('https://connect-cdgy.onrender.com/', '_blank')
 })
 
 const four04Click = createClickMe()
 four04Click.rotation.y = -Math.PI / 2
-four04Click.position.set(230, 23, 3)
+four04Click.position.set(237, 38, 3)
 four04Click.addEventListener('click', () => {
   window.open('https://four04nomore.onrender.com/#/', '_blank')
 })
@@ -603,23 +573,23 @@ base_skill_2.rotation.y = Math.PI / 2
 scene.add(camera, base, base_skill_1, base_skill_2)
 
 // TV for About
-const conectTV = new THREE.Mesh(new THREE.PlaneGeometry(82, 28, 2), new THREE.MeshBasicMaterial({ color: 'red' }))
-conectTV.position.set(-230, 55, -27)
+const conectTV = createTv()
+conectTV.position.set(-235, 55, -27)
 conectTV.rotation.y = Math.PI / 2
 
-const four04TV = new THREE.Mesh(new THREE.PlaneGeometry(82, 28, 2), new THREE.MeshBasicMaterial({ color: 'red' }))
-four04TV.position.set(230, 55, -23)
+const four04TV = createTv()
+four04TV.position.set(238, 55, -23)
 four04TV.rotation.y = -Math.PI / 2
 
-const collegeTV = new THREE.Mesh(new THREE.PlaneGeometry(82, 28, 2), new THREE.MeshBasicMaterial({ color: 'red' }))
+const collegeTV = createTv()
 collegeTV.position.set(-70, 55, -188)
 collegeTV.rotation.y = -Math.PI / 2
 
-const mvplayerTV = new THREE.Mesh(new THREE.PlaneGeometry(82, 28, 2), new THREE.MeshBasicMaterial({ color: 'red' }))
+const mvplayerTV = createTv()
 mvplayerTV.position.set(70, 55, -192)
 mvplayerTV.rotation.y = Math.PI / 2
 
-const comingTV = new THREE.Mesh(new THREE.PlaneGeometry(82, 28, 2), new THREE.MeshBasicMaterial({ color: 'red' }))
+const comingTV = createTv()
 comingTV.position.set(-370, 55, -188)
 comingTV.rotation.y = -Math.PI / 2
 
@@ -797,7 +767,7 @@ function castRays() {
     new THREE.Vector2(0, -1),
     new THREE.Vector2(-1, 0)
   ]
-  const objects = [house_1, house_2, house_3, house_4, house_5,
+  const objects = [conectTV,four04TV,collegeTV, mvplayerTV, comingTV,
     aboutTextCover, skillCover, skillsCover,
     projectBoard, projectBoard_2, projectBoard_3, facebookBoard,
     linkedinBoard, instagramBoard, gmailBoard, contactCover, girl, raju,

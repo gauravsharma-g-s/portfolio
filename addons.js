@@ -158,3 +158,16 @@ export function createBase(length, width, depth) {
     const base = new THREE.Mesh(basegeometry, basematerial);
     return base
   }
+
+
+
+  export function createTv(){
+    const tv = new THREE.Mesh(new THREE.PlaneGeometry(82, 28, 2), new THREE.MeshBasicMaterial({ color: 'green',side:THREE.DoubleSide}))
+    const tube1 = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 60, 30), new THREE.MeshBasicMaterial({ color: 'brown' }))
+    const tube2 = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 60, 30), new THREE.MeshBasicMaterial({ color: 'brown' }))
+    tube1.position.set(-27,-24,-2)
+    tube2.position.set(27,-24,-2)
+    const group = new THREE.Group()
+    group.add(tv,tube1,tube2)
+    return group
+  }
