@@ -13,7 +13,7 @@ const textureLoader = new THREE.TextureLoader()
 const gltfLoader = new GLTFLoader()
 const fontLoader = new FontLoader()
 const raycaster = new THREE.Raycaster()
-let loaded = 0;
+let loaded = 1;
 const total = 2;
 
 const checkModelLoaded = ()=>{
@@ -33,7 +33,7 @@ const sizes = {
  * Loading the Textures
  */
 const grassTexture = textureLoader.load('/textures/grass.jpg',()=>{
-  checkModelLoaded()
+   checkModelLoaded()
 })
 grassTexture.repeat.set(10, 10)
 grassTexture.wrapS = THREE.RepeatWrapping
@@ -180,7 +180,7 @@ gltfLoader.load('/models/house_1.glb', (gltf) => {
   house_5.rotation.y = Math.PI
 
   scene.add(house_1, house_2, house_3, house_4, house_5)
-  checkModelLoaded()
+ // checkModelLoaded()
 })
 
 // Flying Bird
